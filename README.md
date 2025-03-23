@@ -1,11 +1,12 @@
-# STM32 Boot-App Demo
+# STM32 Secure Boot and Application Demo
 
 ## Overview
 This project demonstrates a bootloader and application setup for the STM32H723 microcontroller. The repository contains both bootloader and application code that work together to provide a reliable firmware update mechanism. The bootloader is implemented in the **H723_Boot_testing** folder, and the application firmware is in **H723_App_testing**.
 
 ## Project Structure
-- **H723_Boot_testing/** – Contains the bootloader code that initializes the system, manages firmware update procedures, verifies application integrity, and transfers control to the application.
-- **H723_App_testing/** – Contains the application firmware that runs after the bootloader, implementing the main functionality.
+- `H723_Boot_testing`: Bootloader project for STM32H723.
+- `H723_App_testing`: Application project for STM32H723.
+- `postbuild.sh`: Script to combine bootloader and application hex files.
 
 ## Hardware Requirements
 - STM32H723 development board (e.g., NUCLEO-H723ZG)
@@ -35,6 +36,35 @@ The STM32H723 flash memory is divided into two main sections:
 3. Build the bootloader project in **H723_Boot_testing/** and the application project in **H723_App_testing/**.
 4. Flash the bootloader first, then flash the application firmware.
 5. Reset the board to see the system in action.
+
+## Build Instructions
+
+### Step 1: Build Bootloader Project (`H723_Boot_testing`)
+
+1. Open STM32CubeIDE.
+2. Import the `H723_Boot_testing` project.
+3. Select the `Debug` build configuration.
+4. Build the project (`Project` → `Build Project`).
+5. Verify that the bootloader hex file (`H723_Boot_testing.hex`) is generated in the build output directory (`Debug` ).
+
+### Step 2: Build Application Project (`H723_App_testing`)
+
+1. Import the `H723_App_testing` project into STM32CubeIDE.
+2. Select the `Debug` build configuration.
+3. Build the project (`Project` → `Build Project`).
+4. Verify that the application hex file (`Boot-App-Demo.hex`) is generated in the project directory.
+
+### Step 3: Combine Bootloader and Application Hex Files
+
+Run the provided `postbuild.sh` script to combine the bootloader and application hex files into a single hex file:
+
+```bash
+./postbuild.sh <path_to_bootloader_hex> <path_to_application_hex> <output_combined_hex>
+```
+
+### Step 4: Flash the Combined Hex File
+
+Use STM32CubeProgrammer or your preferred flashing tool to program the combined hex file (`Combined.hex`) onto your STM32H723 device.
 
 ## Development Workflow
 1. Modify the application code (located in `/H723_App_testing/Core/Src/`) as needed.
