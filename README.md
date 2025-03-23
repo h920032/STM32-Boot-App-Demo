@@ -16,14 +16,12 @@ This project demonstrates a bootloader and application setup for the STM32H723 m
   - **LED_RED** on PB14
   - **LED_YELLOW** on PE1
   - **BUTTON** on PC13
-- *Add any additional hardware requirements*
 
 ## Features
 - Boot/Application partition architecture with a dedicated bootloader.
 - Firmware verification and version checking prior to starting the application.
 - LED indicators show system status.
 - Manual firmware update capability via bootloader commands.
-- *Add your key features here*
 
 ## Memory Layout
 The STM32H723 flash memory is divided into two main sections:
