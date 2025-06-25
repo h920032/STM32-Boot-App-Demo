@@ -22,6 +22,8 @@ This project demonstrates a bootloader and application setup for the STM32H723 m
 - Firmware verification and version checking prior to starting the application.
 - LED indicators show system status.
 - Manual firmware update capability via bootloader commands.
+- UART-based update: hold the BUTTON during reset to transfer a new
+  application binary over LPUART1.
 
 ## Memory Layout
 The STM32H723 flash memory is divided into two main sections:
@@ -67,9 +69,9 @@ Use STM32CubeProgrammer or your preferred flashing tool to program the combined 
 ## Development Workflow
 1. Modify the application code (located in `/H723_App_testing/Core/Src/`) as needed.
 2. Rebuild the application project after making changes.
-3. Use the bootloader update mechanism (triggered via button press or command interface) to load updated firmware.
-4. The bootloader performs version checking and integrity verification before transferring execution to the application.
-5. Use the bootloader to update the application through
+3. Hold `BUTTON` during reset to enter UART update mode.
+4. Send the new firmware size (4 bytes, little endian) followed by the binary over LPUART1 @115200 baud.
+5. Once programming is complete the bootloader jumps to the updated application.
 
 ## Configuration
 - **Communication & Boot Mode**: The bootloader and application share system configuration registers (via SYSCFG, NVIC, etc.) to manage boot addresses and version flags.

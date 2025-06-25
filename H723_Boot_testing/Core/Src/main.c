@@ -98,9 +98,9 @@ int main(void)
   
   /* Blink the green LED 5 times (300ms on, 300ms off) */
   Bootloader_BlinkLed(5, 300);
-  
-  /* Jump to application */
-  Bootloader_JumpToApplication();
+
+  /* Process firmware update then jump to application */
+  Bootloader_Process();
   
   /* USER CODE END 2 */
 
